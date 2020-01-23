@@ -53,7 +53,8 @@ pipeline {
                   } 
                  sh("docker tag sriramperumalla/petclinic-spinnaker-jenkins:latest sriram83tech/awsrepo:latest")
                  sh("docker push  sriram83tech/awsrepo:latest") */
-              }
+               }
+            }
         }
         stage('Remove local images') {
             steps {

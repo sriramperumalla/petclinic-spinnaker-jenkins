@@ -7,6 +7,8 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Petclinic Application ==='
+                echo '___ I am running as user: ___'
+                sh 'whoami'
                 sh 'mvn -B -DskipTests clean package' 
             }
         }

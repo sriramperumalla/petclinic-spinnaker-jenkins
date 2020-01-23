@@ -38,15 +38,20 @@ pipeline {
             }
             steps {
                 echo '=== Pushing Petclinic Docker Image ==='
-                script {
+                /*script {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://docker.io/sriram83tech/awsrepo', 'dockerHubCredentials') {
                         app.push("$SHORT_COMMIT")
                         app.push("latest")
-                    }
-                }
-            }
+                    } */
+                script {
+                    GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                    SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
+                  } 
+                 sh("docker tag sriramperumalla/petclinic-spinnaker-jenkins:latest sriram83tech/awsrepo:latest")
+                 sh("docker push  sriram83tech/awsrepo:latest")
+              }
         }
         stage('Remove local images') {
             steps {
